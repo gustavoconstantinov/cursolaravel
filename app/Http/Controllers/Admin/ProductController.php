@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Http\Requests\ProductRequest;
+use App\Traits\UploadTrait;
 
 class ProductController extends Controller
 {
+    use UploadTrait;
     private $product;
     public function __construct(Product $product)
     {
@@ -48,11 +50,18 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
+
         $data = $request->all();
 
         $store = auth()->user()->store;
         $product = $store->products()->create($data);
         $product->categories()->sync($data['categories']);
+
+        if($request->hasFile('photos')) {
+            $images = $this->imageUpload($request->file('photos'), 'image');
+
+            $product->photos()->createMany($images);
+        }
 
         flash('Produto Criado com Sucesso!')->success();
         return redirect()->route('admin.products.index');
@@ -100,6 +109,12 @@ class ProductController extends Controller
         $product->update($data);
         $product->categories()->sync($data['categories']);
 
+        if($request->hasFile('photos')) {
+            $images = $this->imageUpload($request->file('photos'), 'image');
+
+            $product->photos()->createMany($images);
+        }
+
         flash('Produto Atualizado com Sucesso!')->success();
         return redirect()->route('admin.products.index');
     }
@@ -119,4 +134,6 @@ class ProductController extends Controller
         flash('Produto Removido com Sucesso!')->success();
         return redirect()->route('admin.products.index');
     }
+
+
 }
