@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <a href="{{route('admin.products.create')}}" class="btn btn-lg btn-success">Criar Produto</a>
 
     <table class="table table-striped">
@@ -36,4 +37,5 @@
     </table>
 
     {{$products->links()}}
+
 @endsection

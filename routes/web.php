@@ -13,10 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function() {
-    $helloWorld = 'Hello World';
-    return view('welcome',['helloWorld' => $helloWorld]);
-})->name('home');
+Route::get('/','HomeController@index')->name('home');
+Route::get('/product/{slug}', 'HomeController@single')->name('product.single');
+
+Route::prefix('cart')->name('cart.')->group(function(){
+    Route::get('/', 'CartController@index')->name('index');
+    Route::post('add','CartController@add')->name('add');
+
+    Route::get('remove/{slug}','CartController@remove')->name('remove');
+    Route::get('cancel','CartController@cancel')->name('cancel');
+
+});
 
 Auth::routes();
 
@@ -104,7 +111,7 @@ Route::get('/model', function(){
 
 //    return \App\Category::all();
 
-    // Adicionar um produto para uma categoria ou vice-versa
+// Adicionar um produto para uma categoria ou vice-versa
 
 //    $product = \App\Product::find(49);
 //
