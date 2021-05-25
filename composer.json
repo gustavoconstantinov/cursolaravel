@@ -16,6 +16,7 @@
         "laravel/framework": "^7.29",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^2.4",
+        "pagseguro/pagseguro-php-sdk": "^4.2",
         "spatie/laravel-sluggable": "^3.0"
     },
     "require-dev": {

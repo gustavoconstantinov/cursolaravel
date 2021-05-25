@@ -42,7 +42,7 @@
                         <a class="nav-link" href="{{route('admin.categories.index')}}">Categorias</a>
                     </li>
                 </ul>
-
+        @endauth
                 <div class="my-2 my-lg-0">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
@@ -55,7 +55,7 @@
                         </li>
                     </ul>
                 </div>
-        @endauth
+
 
     </div>
 </nav>
@@ -64,5 +64,6 @@
     @include('flash::message')
     @yield('content')
 </div>
+@yield('scripts')
 </body>
 </html>

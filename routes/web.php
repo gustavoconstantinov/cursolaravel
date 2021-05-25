@@ -25,6 +25,10 @@ Route::prefix('cart')->name('cart.')->group(function(){
 
 });
 
+Route::prefix('checkout')->name('checkout.')->group(function(){
+    Route::get('/', 'CheckoutController@index')->name('index');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
