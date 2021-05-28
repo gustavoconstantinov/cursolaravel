@@ -13,6 +13,7 @@
             margin-bottom: 40px;
         }
     </style>
+    @yield('stylesheets')
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 40px;">
@@ -28,6 +29,13 @@
             <li class="nav-item @if(request()->is('/')) active @endif">
                 <a class="nav-link" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
             </li>
+
+            @foreach($categories as $category)
+                <li class="nav-item">
+                    <a class="nav-link" href="#">{{$category->name}}</a>
+                </li>
+            @endforeach
+
         </ul>
 
     @auth
